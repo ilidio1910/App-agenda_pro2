@@ -1,50 +1,24 @@
 # 📧 Configuração de Envio de Email - Ink Agenda Pro
 
-## Pré-requisitos
+## 🔧 Instalação
 
-- PHP 7.4+
-- Composer instalado
-- Uma conta Gmail ou outro servidor SMTP
+### ✅ ÓTIMA NOTÍCIA - Sem Composer!
 
----
+A aplicação agora usa a **função `mail()` nativa do PHP**. 
 
-## 🔧 Instalação do PHPMailer
+**Não precisa instalar Composer nem PHPMailer!** ✨
 
-### Opção 1: Usando Composer (Recomendado)
-
-1. Abra o terminal/prompt na pasta do projeto:
-```bash
-cd c:\xampp\htdocs\app_agenda_2
-```
-
-2. Execute o comando para instalar PHPMailer:
-```bash
-composer install
-```
-
-Isso vai criar a pasta `vendor/` com todas as bibliotecas necessárias.
-
-### Opção 2: Instalação Manual
-
-Se não tiver Composer, [baixe PHPMailer aqui](https://github.com/PHPMailer/PHPMailer) e extraia na pasta do projeto.
+Apenas configure o arquivo `config_email.php` com suas credenciais.
 
 ---
 
-## ⚙️ Configuração Gmail
+## ⚙️ Configuração - 3 Passos Simples
 
-### Passo 1: Ativar Autenticação de Dois Fatores
-1. Acesse sua conta Google: https://myaccount.google.com
-2. Vá para **Segurança** (à esquerda)
-3. Ative **Autenticação de Dois Fatores**
+### Passo 1: Abrir `config_email.php`
 
-### Passo 2: Gerar Senha de App
-1. Em **Segurança**, vá para **Senhas de App**
-2. Selecione "Mail" e "Windows Computer"
-3. Copie a senha gerada (sem espaços)
+Arquivo localizado em: `c:\xampp\htdocs\app_agenda_2\config_email.php`
 
-### Passo 3: Configurar o Arquivo `config_email.php`
-
-Abra o arquivo `config_email.php` e atualize:
+### Passo 2: Inserir seu Email e Senha
 
 ```php
 'smtp_host' => 'smtp.gmail.com',
@@ -88,18 +62,22 @@ Abra o arquivo `config_email.php` e atualize:
    ```
 
 2. Preencha um agendamento ou formulário de contato
+# Passo 3: Testar a Configuração
 
-3. Verifique se recebeu os emails em sua caixa de entrada
+1. Abra no navegador:
+   ```
+   http://localhost/app_agenda_2/test_email.php
+   ```
+
+2. Senha: `admin123`
+
+3. Clique em "Testar Email de Agendamento"
+
+4. Verifique se recebeu o email
 
 ---
 
-## 🔍 Resolvendo Problemas
-
-### ❌ "Erro ao enviar email"
-
-**Causa:** PHPMailer não está instalado
-
-**Solução:**
+## 📧 Para Gmail com Autenticação de Dois Fatoresolução:**
 - Execute `composer install` na pasta do projeto
 - Ou coloque PHPMailer manualmente em `vendor/autoload.php`
 
@@ -125,30 +103,16 @@ Abra o arquivo `config_email.php` e atualize:
 
 **Solução:**
 - Verifique a pasta Spam do Gmail
-- Marque como não-spam para futuras mensagens
+- # Se usar Gmail com 2FA:
+
+1. Acesse: https://myaccount.google.com/apppasswords
+2. Selecione "Mail" e "Windows Computer"
+3. Copie a senha gerada (16 caracteres)
+4. Cole em `config_email.php` no campo `'smtp_password'`
 
 ---
 
-## 📋 Templates de Email
-
-Os emails são enviados em HTML com design bonito:
-
-✅ **Email de confirmação para o cliente** - Quando agenda ou envia mensagem
-✅ **Email de notificação para o admin** - Informando novo agendamento/contato
-
----
-
-## 🔐 Segurança
-
-- **Nunca comita `config_email.php` com credenciais reais no GitHub!**
-- Use variáveis de ambiente em produção
-- Mude a senha de admin em `admin.php`
-
----
-
-## 📞 Suporte
-
-Se tiver dúvidas, entre em contato!
+## 🚀 Usar no Localhost (Desenvolvimento)s, entre em contato!
 
 ---
 
