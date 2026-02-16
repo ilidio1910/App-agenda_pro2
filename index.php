@@ -2,6 +2,11 @@
 // Iniciar sessão para mensagens
 session_start();
 
+// Gerar token CSRF se não existir
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 // Limpar mensagens após exibir
 $mensagem_sucesso = isset($_SESSION['sucesso']) ? $_SESSION['sucesso'] : null;
 $mensagem_erro = isset($_SESSION['erro']) ? $_SESSION['erro'] : null;
@@ -93,6 +98,7 @@ unset($_SESSION['erro']);
             <?php endif; ?>
             
             <form class="booking-form" method="POST" action="processar_agendamento.php">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Nome Completo</label>
@@ -277,6 +283,7 @@ unset($_SESSION['erro']);
         <div class="container">
             <h2 class="section-title">Contato</h2>
             <form class="booking-form" method="POST" action="processar_contato.php">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <div class="form-group">
                     <label for="contactName">Nome</label>
                     <input type="text" id="contactName" name="contactName" required>

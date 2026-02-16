@@ -1,0 +1,62 @@
+<?php
+/**
+ * Configuração do Banco de Dados
+ * Arquivo: src/config/Database.php
+ */
+
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');  // Usuário padrão do XAMPP
+define('DB_PASS', '');      // Senha padrão do XAMPP (vazio)
+define('DB_NAME', 'app_agenda');
+
+// Criar conexão
+try {
+    $pdo = new PDO(
+        'mysql:host=' . DB_HOST . ';charset=utf8mb4',
+        DB_USER,
+        DB_PASS,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]
+    );
+    
+    // Criar banco de dados se não existir
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS " . DB_NAME);
+    $pdo->exec("USE " . DB_NAME);
+    
+    // Tabela de agendamentos
+    $pdo->exec("\
+        CREATE TABLE IF NOT EXISTS agendamentos (\
+            id INT PRIMARY KEY AUTO_INCREMENT,\
+            nome VARCHAR(150) NOT NULL,\
+            telefone VARCHAR(20) NOT NULL,\
+            email VARCHAR(100) NOT NULL,\
+            profissional VARCHAR(100) NOT NULL,\
+            data DATE NOT NULL,\
+            hora TIME NOT NULL,\
+            estilo VARCHAR(50) NOT NULL,\
+            descricao TEXT,\
+            data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,\
+            status VARCHAR(20) DEFAULT 'confirmado'\
+        )\
+    ");
+    
+    // Tabela de contatos
+    $pdo->exec("\
+        CREATE TABLE IF NOT EXISTS contatos (\
+            id INT PRIMARY KEY AUTO_INCREMENT,\
+            nome VARCHAR(150) NOT NULL,\
+            email VARCHAR(100) NOT NULL,\
+            telefone VARCHAR(20),\
+            assunto VARCHAR(200) NOT NULL,\
+            mensagem TEXT NOT NULL,\
+            data_envio DATETIME DEFAULT CURRENT_TIMESTAMP,\
+            lido INT DEFAULT 0\
+        )\
+    ");
+    
+} catch (PDOException $e) {
+    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+}
+?>

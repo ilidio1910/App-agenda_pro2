@@ -1,0 +1,5 @@
+# Proteger pasta data de acesso direto
+<Files "*">
+    Order Deny,Allow
+    Deny from all
+</Files>

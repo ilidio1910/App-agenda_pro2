@@ -1,30 +1,27 @@
 <?php
 session_start();
 
-// Autoload das classes
-require_once 'autoload.php';
+// Incluir gerenciador de emails e logs
+require_once 'EmailManager.php';
 require_once 'logs_auditoria.php';
-
 $emailManager = new EmailManager();
-$contato = new Contato();
 
 // Validar os dados do formulário de contato
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    
     // Validar token CSRF
-    if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) ||
+    if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) || 
         !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         $_SESSION['erro'] = "Erro de segurança: Token CSRF inválido.";
         header('Location: index.php');
         exit;
     }
-
+    
     // Coletar e sanitizar dados
     $name = trim($_POST['contactName'] ?? '');
     $email = trim($_POST['contactEmail'] ?? '');
     $subject = trim($_POST['contactSubject'] ?? '');
     $message = trim($_POST['contactMessage'] ?? '');
-    $phone = trim($_POST['contactPhone'] ?? '');
 
     // Validações básicas
     $erros = [];
@@ -56,39 +53,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Preparar dados para salvar
+    // Salvar dados do contato
     $dados_contato = [
         'nome' => $name,
         'email' => $email,
         'assunto' => $subject,
         'mensagem' => $message,
-        'telefone' => $phone
+        'data_envio' => date('Y-m-d H:i:s'),
+        'ip' => $_SERVER['REMOTE_ADDR']
     ];
 
-    try {
-        // Salvar no banco de dados
-        $id = $contato->salvar($dados_contato);
-
-        // Adicionar ID aos dados para email
-        $dados_contato['id'] = $id;
-        $dados_contato['data_envio'] = date('Y-m-d H:i:s');
-
-        // Registrar log de auditoria
-        registrarLog('CONTATO_ENVIADO', "Nome: $name, Assunto: $subject");
-
-        // Enviar emails
-        $emailManager->enviarConfirmacaoContato($dados_contato);
-        $emailManager->notificarAdminContato($dados_contato);
-
-        $_SESSION['sucesso'] = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
-        header('Location: index.php');
-        exit;
-
-    } catch (Exception $e) {
-        $_SESSION['erro'] = "Erro ao processar contato: " . $e->getMessage();
-        header('Location: index.php');
-        exit;
+    // Salvar em arquivo JSON
+    $arquivo_contatos = 'data/contatos.json';
+    $contatos = [];
+    
+    if (file_exists($arquivo_contatos)) {
+        $contatos = json_decode(file_get_contents($arquivo_contatos), true) ?? [];
     }
+    
+    $contatos[] = $dados_contato;
+    file_put_contents($arquivo_contatos, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+    // Registrar log de auditoria
+    registrarLog('CONTATO_ENVIADO', "Nome: $name, Assunto: $subject");
+
+    // Enviar emails
+    $emailManager->enviarConfirmacaoContato($dados_contato);
+    $emailManager->notificarAdminContato($dados_contato);
+
+    $_SESSION['sucesso'] = "Mensagem enviada com sucesso! Entraremos em contato em breve.";
+    header('Location: index.php');
+    exit;
 
 } else {
     // Se não for POST, redirecionar

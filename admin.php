@@ -2,20 +2,35 @@
 // Página Admin para visualizar agendamentos
 session_start();
 
-// Verificar permissão (proteção básica)
-$senha_admin = "admin123"; // Mude isso em produção!
+// Incluir configuração de segurança admin
+require_once 'config_admin.php';
+require_once 'autoload.php';
+require_once 'logs_auditoria.php';
+require_once 'logs_auditoria.php';
 
-// Se não está autenticado, mostrar formulário de login
-if (!isset($_SESSION['admin_autenticado'])) {
+// Verificar logout
+if (isset($_GET['logout'])) {
+    registrarLog('ADMIN_LOGOUT', 'Logout realizado');
+    logoutAdmin();
+    header('Location: admin.php');
+    exit;
+}
+
+// Verificar permissão
+if (!estaAutenticado()) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['senha'])) {
-        if ($_POST['senha'] === $senha_admin) {
+        if (verificarSenhaAdmin($_POST['senha'])) {
             $_SESSION['admin_autenticado'] = true;
+            registrarLog('ADMIN_LOGIN', 'Login bem-sucedido');
+            header('Location: admin.php');
+            exit;
         } else {
+            registrarLog('ADMIN_LOGIN_FALHA', 'Tentativa de login com senha incorreta');
             $erro_login = "Senha incorreta!";
         }
     }
     
-    if (!isset($_SESSION['admin_autenticado'])) {
+    if (!estaAutenticado()) {
         ?>
         <!DOCTYPE html>
         <html lang="pt-BR">
@@ -133,16 +148,17 @@ if (!isset($_SESSION['admin_autenticado'])) {
 }
 
 // Se chegou aqui, está autenticado
-// Carregar agendamentos
-$agendamentos = [];
-if (file_exists('agendamentos.json')) {
-    $agendamentos = json_decode(file_get_contents('agendamentos.json'), true) ?? [];
-}
+// Carregar agendamentos do banco
+$agendamento = new Agendamento();
+$contato = new Contato();
 
-// Carregar contatos
-$contatos = [];
-if (file_exists('contatos.json')) {
-    $contatos = json_decode(file_get_contents('contatos.json'), true) ?? [];
+try {
+    $agendamentos = $agendamento->obterTodos();
+    $contatos = $contato->obterTodos();
+} catch (Exception $e) {
+    $agendamentos = [];
+    $contatos = [];
+    $erro_db = "Erro ao carregar dados: " . $e->getMessage();
 }
 
 // Função para fazer logout
@@ -300,10 +316,10 @@ if (isset($_GET['logout'])) {
 </head>
 <body>
     <div class="container">
-        <div class="admin-header">
-            <h1>📊 Painel de Administração</h1>
-            <a href="?logout=1" class="btn-logout">Sair</a>
-        </div>
+            <div class="admin-header">
+                <h1>📊 Painel de Administração</h1>
+                <a href="?logout=1" class="btn-logout">Sair</a>
+            </div>
 
         <!-- Estatísticas -->
         <div class="stats-grid">

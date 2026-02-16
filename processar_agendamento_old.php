@@ -1,24 +1,22 @@
 <?php
 session_start();
 
-// Autoload das classes
-require_once 'autoload.php';
+// Incluir gerenciador de emails e logs
+require_once 'EmailManager.php';
 require_once 'logs_auditoria.php';
-
 $emailManager = new EmailManager();
-$agendamento = new Agendamento();
 
 // Validar os dados do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    
     // Validar token CSRF
-    if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) ||
+    if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) || 
         !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
         $_SESSION['erro'] = "Erro de segurança: Token CSRF inválido.";
         header('Location: index.php');
         exit;
     }
-
+    
     // Coletar e sanitizar dados
     $name = trim($_POST['name'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
@@ -66,17 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erros[] = "Estilo da tatuagem é obrigatório";
     }
 
-    // Verificar se o horário já está disponível
-    if (empty($erros)) {
-        try {
-            if (!$agendamento->verificarDisponibilidade($artist, $date, $time)) {
-                $erros[] = "Horário indisponível para esse profissional nesta data";
-            }
-        } catch (Exception $e) {
-            $erros[] = "Erro ao verificar disponibilidade: " . $e->getMessage();
-        }
-    }
-
     // Se houver erros, redirecionar com mensagem
     if (!empty($erros)) {
         $_SESSION['erro'] = implode(', ', $erros);
@@ -84,7 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Preparar dados para salvar
+    // Aqui você salvaria no banco de dados
+    // Por enquanto, apenas exibir mensagem de sucesso
+    
+    // Salvar em um arquivo de log (opcional)
     $dados_agendamento = [
         'nome' => $name,
         'telefone' => $phone,
@@ -93,33 +83,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'data' => $date,
         'hora' => $time,
         'estilo' => $style,
-        'descricao' => $description
+        'descricao' => $description,
+        'data_envio' => date('Y-m-d H:i:s')
     ];
 
-    try {
-        // Salvar no banco de dados
-        $id = $agendamento->salvar($dados_agendamento);
-
-        // Adicionar ID aos dados para email
-        $dados_agendamento['id'] = $id;
-        $dados_agendamento['data_envio'] = date('Y-m-d H:i:s');
-
-        // Registrar log de auditoria
-        registrarLog('AGENDAMENTO_CRIADO', "Cliente: $name, Profissional: $artist, Data: $date $time");
-
-        // Enviar emails
-        $emailManager->enviarConfirmacaoAgendamento($dados_agendamento);
-        $emailManager->notificarAdminAgendamento($dados_agendamento);
-
-        $_SESSION['sucesso'] = "Agendamento realizado com sucesso! Enviaremos um email de confirmação em breve.";
-        header('Location: index.php');
-        exit;
-
-    } catch (Exception $e) {
-        $_SESSION['erro'] = "Erro ao processar agendamento: " . $e->getMessage();
-        header('Location: index.php');
-        exit;
+    // Salvar em arquivo JSON (backup)
+    $arquivo_agendamentos = 'data/agendamentos.json';
+    $agendamentos = [];
+    
+    if (file_exists($arquivo_agendamentos)) {
+        $agendamentos = json_decode(file_get_contents($arquivo_agendamentos), true) ?? [];
     }
+    
+    $agendamentos[] = $dados_agendamento;
+    file_put_contents($arquivo_agendamentos, json_encode($agendamentos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+    // Registrar log de auditoria
+    registrarLog('AGENDAMENTO_CRIADO', "Cliente: $name, Profissional: $artist, Data: $date $time");
+
+    // Enviar emails
+    $emailManager->enviarConfirmacaoAgendamento($dados_agendamento);
+    $emailManager->notificarAdminAgendamento($dados_agendamento);
+
+    $_SESSION['sucesso'] = "Agendamento realizado com sucesso! Enviaremos um email de confirmação em breve.";
+    header('Location: index.php');
+    exit;
 
 } else {
     // Se não for POST, redirecionar

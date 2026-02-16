@@ -1,24 +1,20 @@
 <?php
+/**
+ * Processador de Agendamento
+ * Arquivo: src/process/processar_agendamento.php
+ */
+
 session_start();
 
 // Autoload das classes
-require_once 'autoload.php';
-require_once 'logs_auditoria.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/autoload.php';
 
 $emailManager = new EmailManager();
 $agendamento = new Agendamento();
 
 // Validar os dados do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // Validar token CSRF
-    if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) ||
-        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        $_SESSION['erro'] = "Erro de segurança: Token CSRF inválido.";
-        header('Location: index.php');
-        exit;
-    }
-
+    
     // Coletar e sanitizar dados
     $name = trim($_POST['name'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
@@ -80,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Se houver erros, redirecionar com mensagem
     if (!empty($erros)) {
         $_SESSION['erro'] = implode(', ', $erros);
-        header('Location: index.php');
+        header('Location: ../../index.php');
         exit;
     }
 
@@ -99,31 +95,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Salvar no banco de dados
         $id = $agendamento->salvar($dados_agendamento);
-
+        
         // Adicionar ID aos dados para email
         $dados_agendamento['id'] = $id;
         $dados_agendamento['data_envio'] = date('Y-m-d H:i:s');
-
-        // Registrar log de auditoria
-        registrarLog('AGENDAMENTO_CRIADO', "Cliente: $name, Profissional: $artist, Data: $date $time");
+        
+        // Salvar em arquivo JSON como backup
+        $arquivo_agendamentos = dirname(dirname(dirname(__FILE__))) . '/agendamentos.json';
+        $agendamentos = [];
+        
+        if (file_exists($arquivo_agendamentos)) {
+            $agendamentos = json_decode(file_get_contents($arquivo_agendamentos), true) ?? [];
+        }
+        
+        $agendamentos[] = $dados_agendamento;
+        file_put_contents($arquivo_agendamentos, json_encode($agendamentos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         // Enviar emails
         $emailManager->enviarConfirmacaoAgendamento($dados_agendamento);
         $emailManager->notificarAdminAgendamento($dados_agendamento);
 
         $_SESSION['sucesso'] = "Agendamento realizado com sucesso! Enviaremos um email de confirmação em breve.";
-        header('Location: index.php');
+        header('Location: ../../index.php');
         exit;
-
+        
     } catch (Exception $e) {
         $_SESSION['erro'] = "Erro ao processar agendamento: " . $e->getMessage();
-        header('Location: index.php');
+        header('Location: ../../index.php');
         exit;
     }
 
 } else {
     // Se não for POST, redirecionar
-    header('Location: index.php');
+    header('Location: ../../index.php');
     exit;
 }
 ?>
