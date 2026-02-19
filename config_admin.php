@@ -5,8 +5,8 @@
  */
 
 // Hash da senha admin (gerado com password_hash)
-// Senha padrão: "admin123" - ALTERE IMEDIATAMENTE EM PRODUÇÃO!
-define('ADMIN_PASSWORD_HASH', password_hash('admin123', PASSWORD_DEFAULT));
+// Senha padrão: "J1910@17p" - ALTERE IMEDIATAMENTE EM PRODUÇÃO!
+define('ADMIN_PASSWORD_HASH', password_hash('J1910@17p', PASSWORD_DEFAULT));
 
 // Função para verificar senha admin
 function verificarSenhaAdmin($senha) {

@@ -241,16 +241,19 @@ nav a:hover, nav a.active {
     height: 200px;
     background: var(--card-bg);
     padding: 0;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
 }
 
 .artist-image img {
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
-    display: block;
+    display: flex;
     border: 0;
+    border-radius: 20%;
 }
 
 .artist-info {
@@ -280,6 +283,37 @@ nav a:hover, nav a.active {
 }
 
 /* Portfolio Gallery */
+.portfolio-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--border);
+    background: transparent;
+    color: var(--text-primary);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    border-color: var(--ink-purple);
+    color: var(--ink-purple);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--ink-purple), var(--ink-blue));
+    border-color: transparent;
+    color: white;
+}
+
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -295,8 +329,13 @@ nav a:hover, nav a.active {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
     overflow: hidden;
+    position: relative;
+}
+
+.portfolio-item.hidden {
+    display: none;
 }
 
 .portfolio-item:hover {
@@ -307,8 +346,28 @@ nav a:hover, nav a.active {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    display: flex;
     border-radius: inherit;
+    pointer-events: none;
+}
+
+.portfolio-artist-tag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(139, 92, 246, 0.9);
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.portfolio-item:hover .portfolio-artist-tag {
+    opacity: 1;
 }
 
 /* Modal */
@@ -319,7 +378,7 @@ nav a:hover, nav a.active {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.95);
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -338,6 +397,32 @@ nav a:hover, nav a.active {
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
+    position: relative;
+}
+
+.modal-content.image-modal {
+    background: transparent;
+    padding: 1rem;
+    border: none;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.modal-content.image-modal img {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
 }
 
 .modal-header {
@@ -353,6 +438,14 @@ nav a:hover, nav a.active {
     color: var(--text-secondary);
     font-size: 1.5rem;
     cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+}
+
+.close-btn:hover {
+    color: var(--text-primary);
 }
 
 /* Success Message */

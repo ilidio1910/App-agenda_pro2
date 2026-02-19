@@ -12,31 +12,37 @@ function showSection(sectionId) {
     event.target?.classList.add('active');
 }
 
-// Função para abrir modal
-function openModal(title) {
+// Função para abrir imagem em modal
+function openImageModal(imageSrc) {
+    console.log('Abrindo imagem:', imageSrc);
+    
     const modal = document.getElementById('portfolioModal');
-    const modalTitle = document.getElementById('modalTitle');
+    const modalImage = document.getElementById('modalImage');
 
-    modalTitle.textContent = title;
-    modal.classList.add('active');
+    if (modal && modalImage) {
+        modalImage.src = imageSrc;
+        modal.classList.add('active');
+        console.log('Modal aberto com sucesso');
+    } else {
+        console.error('Modal ou imagem não encontrados');
+    }
 }
 
 // Função para fechar modal
 function closeModal() {
     const modal = document.getElementById('portfolioModal');
-    modal.classList.remove('active');
+    if (modal) {
+        modal.classList.remove('active');
+    }
 }
 
-// Função para agendar com um artista
-function bookArtist(artistName) {
-    document.getElementById('artist').value = artistName;
-    showSection('booking');
-}
-
-// Fechar modal ao clicar fora dele
+// Fechar modal ao clicar no background (fora da imagem)
 document.addEventListener('click', function(event) {
     const modal = document.getElementById('portfolioModal');
-    if (event.target === modal) {
+    const modalContent = modal?.querySelector('.modal-content');
+    
+    // Fechar apenas se clicar no fundo (modal), não no conteúdo
+    if (modal && event.target === modal) {
         closeModal();
     }
 });
@@ -52,6 +58,34 @@ function loadCalendarEvents() {
 
 function initGoogleAPI() {
     // API do Google será configurada aqui
+}
+
+// Função para filtrar portfólio por artista
+function filterPortfolio(artistId) {
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    // Atualizar botões de filtro
+    filterButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if ((artistId === 'all' && btn.textContent === 'Todos os Artistas') ||
+            (btn.textContent.toLowerCase().includes(artistId))) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Filtrar itens
+    portfolioItems.forEach(item => {
+        if (artistId === 'all') {
+            item.classList.remove('hidden');
+        } else {
+            if (item.dataset.artist === artistId) {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        }
+    });
 }
 
 // Remover mensagens após 5 segundos

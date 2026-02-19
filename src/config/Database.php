@@ -9,7 +9,9 @@ define('DB_USER', 'root');  // Usuário padrão do XAMPP
 define('DB_PASS', '');      // Senha padrão do XAMPP (vazio)
 define('DB_NAME', 'app_agenda');
 
-// Criar conexão
+// Criar conexão global
+global $pdo;
+
 try {
     $pdo = new PDO(
         'mysql:host=' . DB_HOST . ';charset=utf8mb4',

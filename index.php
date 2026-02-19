@@ -177,7 +177,7 @@ unset($_SESSION['erro']);
             <div class="artists-grid">
                 <div class="artist-card">
                     <div class="artist-image">
-                        <img src="imagens/ilidio-perfil.jpeg" alt="Ilidio soares - Blackwork" loading="lazy">
+                        <img src="img/ilidio-perfil.jpeg" alt="Ilidio soares - Blackwork" loading="lazy">
                     </div>
                     <div class="artist-info">
                         <h3 class="artist-name">Ilidio Soares</h3>
@@ -186,24 +186,24 @@ unset($_SESSION['erro']);
                             <span class="stars">★★★★★</span>
                             <span>4.9 (127 avaliações)</span>
                         </div>
-                        <p>8 anos de experiência em tatuagens taços delicados.</p>
+                        <p>8 anos de experiência em tatuagens traços delicados.</p>
                         <button class="btn btn-primary btn-artist" onclick="bookArtist('ilidio soares')">Agendar com Ilidio</button>
                     </div>
                 </div>
 
                 <div class="artist-card">
                     <div class="artist-image">
-                        <img src="https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Carlos+Santos" alt="Carlos Santos - Tradicional" loading="lazy">
+                        <img src="" alt="Carlos Santos - Tradicional" loading="lazy">
                     </div>
                     <div class="artist-info">
-                        <h3 class="artist-name">Carlos Santos</h3>
+                        <h3 class="artist-name">Nathana Soares</h3>
                         <p class="artist-specialty">Especialista em Tradicional</p>
                         <div class="artist-rating">
                             <span class="stars">★★★★★</span>
                             <span>4.8 (95 avaliações)</span>
                         </div>
                         <p>8 anos de experiência em tatuagens tradicionais americanas.</p>
-                        <button class="btn btn-primary btn-artist" onclick="bookArtist('carlos-santos')">Agendar com Carlos</button>
+                        <button class="btn btn-primary btn-artist" onclick="bookArtist('carlos-santos')">Agendar com Nathana Soares</button>
                     </div>
                 </div>
 
@@ -246,33 +246,59 @@ unset($_SESSION['erro']);
     <section id="portfolio" class="section hidden">
         <div class="container">
             <h2 class="section-title">Portfólio</h2>
+            
+            <!-- Filtro por Artista -->
+            <div class="portfolio-filters">
+                <button class="filter-btn active" onclick="filterPortfolio('all')">Todos os Artistas</button>
+                <button class="filter-btn" onclick="filterPortfolio('ilidio-soares')">Ilidio Soares</button>
+                <button class="filter-btn" onclick="filterPortfolio('carlos-santos')">Carlos Santos</button>
+                <button class="filter-btn" onclick="filterPortfolio('maria-costa')">Maria Costa</button>
+                <button class="filter-btn" onclick="filterPortfolio('joao-oliveira')">João Oliveira</button>
+            </div>
+
             <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openModal('Blackwork - Mulher com Águia')">
-                    <img src="imagens/img-desenho.jpeg" alt="Blackwork - Mulher com Águia" loading="lazy">
+                <!-- Ilidio Soares - Blackwork -->
+                <div class="portfolio-item" data-artist="ilidio-soares" onclick="openImageModal('img/tattoo-floral.jpg')">
+                    <img src="img/tattoo-floral.jpg" alt="Blackwork - Mulher com Águia" loading="lazy">
+                    <div class="portfolio-artist-tag">Ilidio Soares</div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('Tradicional - Águia')">
+                <div class="portfolio-item" data-artist="ilidio-soares" onclick="openImageModal('https://via.placeholder.com/300x300/000000/FFFFFF?text=Mandala+Blackwork')">
+                    <img src="img/tattoo-floral.jpg" alt="Blackwork - Mandala" loading="lazy">
+                    <div class="portfolio-artist-tag">Ilidio Soares</div>
+                </div>
+
+                <!-- Carlos Santos - Tradicional -->
+                <div class="portfolio-item" data-artist="carlos-santos" onclick="openImageModal('https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Águia+Tradicional')">
                     <img src="https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Águia+Tradicional" alt="Tradicional - Águia" loading="lazy">
+                    <div class="portfolio-artist-tag">Carlos Santos</div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('Minimalista - Lua')">
-                    <img src="https://via.placeholder.com/300x300/10B981/FFFFFF?text=Lua+Minimalista" alt="Minimalista - Lua" loading="lazy">
-                </div>
-                <div class="portfolio-item" onclick="openModal('Blackwork - Mandala')">
-                    <img src="https://via.placeholder.com/300x300/000000/FFFFFF?text=Mandala+Blackwork" alt="Blackwork - Mandala" loading="lazy">
-                </div>
-                <div class="portfolio-item" onclick="openModal('Colorida - Borboleta')">
-                    <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Borboleta+Colorida" alt="Colorida - Borboleta" loading="lazy">
-                </div>
-                <div class="portfolio-item" onclick="openModal('Geométrica - Triângulos')">
-                    <img src="https://via.placeholder.com/300x300/4ECDC4/FFFFFF?text=Triângulos+Geométricos" alt="Geométrica - Triângulos" loading="lazy">
-                </div>
-                <div class="portfolio-item" onclick="openModal('Realismo - Rosa')">
-                    <img src="https://via.placeholder.com/300x300/E91E63/FFFFFF?text=Rosa+Realismo" alt="Realismo - Rosa" loading="lazy">
-                </div>
-                <div class="portfolio-item" onclick="openModal('Tradicional - Caveira')">
+                <div class="portfolio-item" data-artist="carlos-santos" onclick="openImageModal('https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=Caveira+Tradicional')">
                     <img src="https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=Caveira+Tradicional" alt="Tradicional - Caveira" loading="lazy">
+                    <div class="portfolio-artist-tag">Carlos Santos</div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('Minimalista - Coração')">
+
+                <!-- Maria Costa - Minimalista -->
+                <div class="portfolio-item" data-artist="maria-costa" onclick="openImageModal('https://via.placeholder.com/300x300/10B981/FFFFFF?text=Lua+Minimalista')">
+                    <img src="https://via.placeholder.com/300x300/10B981/FFFFFF?text=Lua+Minimalista" alt="Minimalista - Lua" loading="lazy">
+                    <div class="portfolio-artist-tag">Maria Costa</div>
+                </div>
+                <div class="portfolio-item" data-artist="maria-costa" onclick="openImageModal('https://via.placeholder.com/300x300/FF5722/FFFFFF?text=Coração+Minimalista')">
                     <img src="https://via.placeholder.com/300x300/FF5722/FFFFFF?text=Coração+Minimalista" alt="Minimalista - Coração" loading="lazy">
+                    <div class="portfolio-artist-tag">Maria Costa</div>
+                </div>
+                <div class="portfolio-item" data-artist="maria-costa" onclick="openImageModal('https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Borboleta+Colorida')">
+                    <img src="https://via.placeholder.com/300x300/FF6B6B/FFFFFF?text=Borboleta+Colorida" alt="Colorida - Borboleta" loading="lazy">
+                    <div class="portfolio-artist-tag">Maria Costa</div>
+                </div>
+
+                <!-- João Oliveira -->
+                <div class="portfolio-item" data-artist="joao-oliveira" onclick="openImageModal('https://via.placeholder.com/300x300/4ECDC4/FFFFFF?text=Triângulos+Geométricos')">
+                    <img src="https://via.placeholder.com/300x300/4ECDC4/FFFFFF?text=Triângulos+Geométricos" alt="Geométrica - Triângulos" loading="lazy">
+                    <div class="portfolio-artist-tag">João Oliveira</div>
+                </div>
+                <div class="portfolio-item" data-artist="joao-oliveira" onclick="openImageModal('https://via.placeholder.com/300x300/E91E63/FFFFFF?text=Rosa+Realismo')">
+                    <img src="https://via.placeholder.com/300x300/E91E63/FFFFFF?text=Rosa+Realismo" alt="Realismo - Rosa" loading="lazy">
+                    <div class="portfolio-artist-tag">João Oliveira</div>
                 </div>
             </div>
         </div>
@@ -322,21 +348,11 @@ unset($_SESSION['erro']);
         </div>
     </section>
 
-    <!-- Modal -->
+    <!-- Modal Lightbox -->
     <div class="modal" id="portfolioModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalTitle">Detalhes da Tatuagem</h3>
-                <button class="close-btn" onclick="closeModal()">&times;</button>
-            </div>
-            <div id="modalContent">
-                <p>Esta é uma obra de arte única criada por nossos profissionais especializados.</p>
-                <p><strong>Estilo:</strong> <span id="modalStyle"></span></p>
-                <p><strong>Profissional:</strong> <span id="modalArtist"></span></p>
-                <p><strong>Tempo estimado:</strong> <span id="modalTime"></span></p>
-                <p><strong>Preço estimado:</strong> <span id="modalPrice"></span></p>
-            </div>
-            <button class="btn btn-primary btn-modal">Agendar esta Tatuagem</button>
+        <div class="modal-content image-modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <img id="modalImage" src="" alt="Imagem em tamanho total" loading="lazy">
         </div>
     </div>
 

@@ -5,6 +5,14 @@ session_start();
 require_once 'autoload.php';
 require_once 'logs_auditoria.php';
 
+// Ativar exibição de erros para debug
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
+// Registrar que o script foi executado
+registrarLog('PROCESSAR_INICIADO', 'Processar agendamento iniciado');
+
 $emailManager = new EmailManager();
 $agendamento = new Agendamento();
 
@@ -73,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $erros[] = "Horário indisponível para esse profissional nesta data";
             }
         } catch (Exception $e) {
-            $erros[] = "Erro ao verificar disponibilidade: " . $e->getMessage();
+            error_log("Erro ao verificar disponibilidade: " . $e->getMessage());
+            $erros[] = "Erro ao verificar disponibilidade";
         }
     }
 
@@ -116,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
 
     } catch (Exception $e) {
+        error_log("Erro ao processar agendamento: " . $e->getMessage());
         $_SESSION['erro'] = "Erro ao processar agendamento: " . $e->getMessage();
         header('Location: index.php');
         exit;
