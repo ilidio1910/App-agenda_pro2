@@ -1,0 +1,30 @@
+[2026-02-19 17:20:30] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-19 17:23:31] [::1] [Sistema] ADMIN_LOGOUT: Logout realizado
+[2026-02-19 17:24:00] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-19 17:39:29] [::1] [Sistema] PROCESSAR_INICIADO: Processar agendamento iniciado
+[2026-02-19 17:41:02] [::1] [Sistema] ADMIN_LOGOUT: Logout realizado
+[2026-02-19 17:41:05] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-19 18:02:10] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-19 18:39:49] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"ead133946dbbed369f6e68a9ead27e73c48f15dac7703c582ed82ba9600b9972","name":"Julho Lopes ","phone":"32 991234332","email":"julho2lopes@gmail.com","artist":"ilidio-soares","date":"2026-02-22","time":"14:00","style":"minimalista","description":"test 1"}
+[2026-02-19 18:39:49] [::1] [Sistema] PROCESSAR_DADOS: Nome: Julho Lopes, Email: julho2lopes@gmail.com, Data: 2026-02-22, Hora: 14:00
+[2026-02-19 18:39:49] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 18:39:49] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-22, 14:00
+[2026-02-19 18:39:49] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 18:45:03] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"ead133946dbbed369f6e68a9ead27e73c48f15dac7703c582ed82ba9600b9972","name":"Bruno Soares","phone":"31 989876567","email":"bruno1234@gmail.com","artist":"carlos-santos","date":"2026-02-20","time":"15:00","style":"minimalista","description":"teste 2"}
+[2026-02-19 18:45:03] [::1] [Sistema] PROCESSAR_DADOS: Nome: Bruno Soares, Email: bruno1234@gmail.com, Data: 2026-02-20, Hora: 15:00
+[2026-02-19 18:45:03] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 18:45:03] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: carlos-santos, 2026-02-20, 15:00
+[2026-02-19 18:45:03] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 18:46:08] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"ead133946dbbed369f6e68a9ead27e73c48f15dac7703c582ed82ba9600b9972","name":"Marcio Lopes","phone":"32 86879865","email":"marciolopes@gmail.com","artist":"joao-oliveira","date":"2026-02-25","time":"16:00","style":"geometrica","description":"teste 2"}
+[2026-02-19 18:46:08] [::1] [Sistema] PROCESSAR_DADOS: Nome: Marcio Lopes, Email: marciolopes@gmail.com, Data: 2026-02-25, Hora: 16:00
+[2026-02-19 18:46:08] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 18:46:08] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: joao-oliveira, 2026-02-25, 16:00
+[2026-02-19 18:46:08] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 18:46:21] [::1] [Sistema] ADMIN_LOGOUT: Logout realizado
+[2026-02-19 18:46:23] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"ead133946dbbed369f6e68a9ead27e73c48f15dac7703c582ed82ba9600b9972","name":"ilidio Ferreira ","phone":"3199245-4802","email":"lidiovegan@gmail.com","artist":"ilidio-soares","date":"2026-02-26","time":"15:00","style":"blackwork","description":"test "}
+[2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_DADOS: Nome: ilidio Ferreira, Email: lidiovegan@gmail.com, Data: 2026-02-26, Hora: 15:00
+[2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-26, 15:00
+[2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada

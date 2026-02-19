@@ -9,7 +9,7 @@
 require_once dirname(dirname(dirname(__FILE__))) . '/autoload.php';
 
 $agendamento = new Agendamento();
-$arquivo_json = dirname(dirname(dirname(__FILE__))) . '/data/agendamentos.json';
+$arquivo_json = dirname(dirname(dirname(__FILE__))) . '/storage/agendamentos.json';
 
 // Verificar se o arquivo JSON existe
 if (!file_exists($arquivo_json)) {

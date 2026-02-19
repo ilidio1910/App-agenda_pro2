@@ -8,12 +8,14 @@ session_start();
 
 // Autoload das classes
 require_once dirname(dirname(dirname(__FILE__))) . '/autoload.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/logs/logs_auditoria.php';
 
-$emailManager = new EmailManager();
+// $emailManager = new EmailManager(); // Removido - sistema de email desabilitado
 $agendamento = new Agendamento();
 
 // Validar os dados do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    registrarLog('PROCESSAR_POST', 'Dados recebidos: ' . json_encode($_POST));
     
     // Coletar e sanitizar dados
     $name = trim($_POST['name'] ?? '');
@@ -24,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $time = trim($_POST['time'] ?? '');
     $style = trim($_POST['style'] ?? '');
     $description = trim($_POST['description'] ?? '');
+
+    registrarLog('PROCESSAR_DADOS', "Nome: $name, Email: $email, Data: $date, Hora: $time");
 
     // Validações básicas
     $erros = [];
@@ -62,12 +66,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erros[] = "Estilo da tatuagem é obrigatório";
     }
 
+    // Se houver erros, redirecionar com mensagem
+    if (!empty($erros)) {
+        registrarLog('PROCESSAR_ERROS_VALIDACAO', 'Erros: ' . implode(', ', $erros));
+        $_SESSION['erro'] = implode(', ', $erros);
+        header('Location: ../../index.php');
+        exit;
+    }
+
+    registrarLog('PROCESSAR_VALIDACOES_OK', 'Validações básicas passaram');
+
     // Verificar se o horário já está disponível
+    registrarLog('PROCESSAR_ANTES_DISP', 'Antes da verificação de disponibilidade, erros: ' . (empty($erros) ? 'vazio' : implode(', ', $erros)));
     if (empty($erros)) {
         try {
+            registrarLog('PROCESSAR_VERIFICANDO_DISP', "Verificando: $artist, $date, $time");
             if (!$agendamento->verificarDisponibilidade($artist, $date, $time)) {
                 $erros[] = "Horário indisponível para esse profissional nesta data";
             }
+            registrarLog('PROCESSAR_DISP_OK', 'Disponibilidade verificada');
         } catch (Exception $e) {
             $erros[] = "Erro ao verificar disponibilidade: " . $e->getMessage();
         }
@@ -92,34 +109,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'descricao' => $description
     ];
 
+    registrarLog('PROCESSAR_SALVANDO', 'Tentando salvar agendamento');
+
     try {
         // Salvar no banco de dados
         $id = $agendamento->salvar($dados_agendamento);
+        registrarLog('PROCESSAR_SALVO_BD', "Agendamento salvo com ID: $id");
         
         // Adicionar ID aos dados para email
         $dados_agendamento['id'] = $id;
         $dados_agendamento['data_envio'] = date('Y-m-d H:i:s');
         
         // Salvar em arquivo JSON como backup
-        $arquivo_agendamentos = dirname(dirname(dirname(__FILE__))) . '/agendamentos.json';
+        $arquivo_agendamentos = dirname(dirname(dirname(__FILE__))) . '/storage/agendamentos.json';
+        registrarLog('PROCESSAR_JSON_INICIO', "Arquivo JSON: $arquivo_agendamentos");
+        
         $agendamentos = [];
         
         if (file_exists($arquivo_agendamentos)) {
             $agendamentos = json_decode(file_get_contents($arquivo_agendamentos), true) ?? [];
+            registrarLog('PROCESSAR_JSON_LIDO', 'JSON lido, ' . count($agendamentos) . ' agendamentos existentes');
+        } else {
+            registrarLog('PROCESSAR_JSON_NAO_EXISTE', 'Arquivo JSON não existe');
         }
         
         $agendamentos[] = $dados_agendamento;
-        file_put_contents($arquivo_agendamentos, json_encode($agendamentos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        registrarLog('PROCESSAR_JSON_ADICIONADO', 'Novo agendamento adicionado ao array');
+        
+        $resultado_json = file_put_contents($arquivo_agendamentos, json_encode($agendamentos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        registrarLog('PROCESSAR_JSON_SALVO', "JSON salvo, resultado: $resultado_json");
 
-        // Enviar emails
-        $emailManager->enviarConfirmacaoAgendamento($dados_agendamento);
-        $emailManager->notificarAdminAgendamento($dados_agendamento);
+        // Sistema de email removido
+        // $emailManager->enviarConfirmacaoAgendamento($dados_agendamento);
+        // $emailManager->notificarAdminAgendamento($dados_agendamento);
 
-        $_SESSION['sucesso'] = "Agendamento realizado com sucesso! Enviaremos um email de confirmação em breve.";
+        $_SESSION['sucesso'] = "Agendamento realizado com sucesso!";
         header('Location: ../../index.php');
         exit;
         
     } catch (Exception $e) {
+        registrarLog('PROCESSAR_ERRO', 'Erro ao salvar: ' . $e->getMessage());
         $_SESSION['erro'] = "Erro ao processar agendamento: " . $e->getMessage();
         header('Location: ../../index.php');
         exit;

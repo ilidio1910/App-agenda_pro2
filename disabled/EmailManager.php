@@ -9,7 +9,7 @@ class EmailManager {
     private $config;
 
     public function __construct() {
-        $this->config = require 'config_email.php';
+        $this->config = require __DIR__ . '/../config/config_email.php';
     }
 
     /**

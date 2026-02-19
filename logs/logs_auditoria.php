@@ -6,7 +6,7 @@
 
 // Função para registrar log
 function registrarLog($acao, $detalhes = '', $usuario = 'Sistema') {
-    $log_dir = 'data/logs/';
+    $log_dir = dirname(__DIR__) . '/logs/';
     
     // Criar diretório se não existir
     if (!is_dir($log_dir)) {
@@ -24,7 +24,7 @@ function registrarLog($acao, $detalhes = '', $usuario = 'Sistema') {
 
 // Função para obter logs recentes
 function obterLogsRecentes($dias = 7) {
-    $log_dir = 'data/logs/';
+    $log_dir = dirname(__DIR__) . '/logs/';
     $logs = [];
     
     if (!is_dir($log_dir)) {
