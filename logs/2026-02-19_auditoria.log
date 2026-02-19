@@ -28,3 +28,42 @@
 [2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
 [2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-26, 15:00
 [2026-02-19 18:52:23] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 19:00:08] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-19 19:01:39] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"f5ea0d9fb38064584a2922f1e450b8fd95c64c6285919cfdc9fe71144ced5522","name":"ilidio soares Ferrira","phone":"32 992453423","email":"lidioferreira@gmail.com","artist":"carlos-santos","date":"2026-02-28","time":"16:00","style":"realismo","description":"teste 1"}
+[2026-02-19 19:01:39] [::1] [Sistema] PROCESSAR_DADOS: Nome: ilidio soares Ferrira, Email: lidioferreira@gmail.com, Data: 2026-02-28, Hora: 16:00
+[2026-02-19 19:01:39] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 19:01:39] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-19 19:01:39] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: carlos-santos, 2026-02-28, 16:00
+[2026-02-19 19:01:39] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 19:06:00] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"f5ea0d9fb38064584a2922f1e450b8fd95c64c6285919cfdc9fe71144ced5522","name":"ilidio soares","phone":"32 99664433","email":"lidiosoares@gmail.com","artist":"ilidio-soares","date":"2026-02-27","time":"15:00","style":"tradicional","description":"teste 1"}
+[2026-02-19 19:06:00] [::1] [Sistema] PROCESSAR_DADOS: Nome: ilidio soares, Email: lidiosoares@gmail.com, Data: 2026-02-27, Hora: 15:00
+[2026-02-19 19:06:00] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 19:06:00] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-19 19:06:00] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-27, 15:00
+[2026-02-19 19:06:00] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"f5ea0d9fb38064584a2922f1e450b8fd95c64c6285919cfdc9fe71144ced5522","name":"ilidio soares ferreira","phone":"42 88776654","email":"lidiosoares@gmail.com","artist":"ilidio-soares","date":"2026-02-27","time":"16:00","style":"realismo","description":"teste 1"}
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_DADOS: Nome: ilidio soares ferreira, Email: lidiosoares@gmail.com, Data: 2026-02-27, Hora: 16:00
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-27, 16:00
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_SEM_ERROS_FINAIS: Passou todas as validações, indo para salvamento
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_SALVANDO: Tentando salvar agendamento
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_SALVO_BD: Agendamento salvo com ID: 13
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_JSON_INICIO: Arquivo JSON: C:\xampp\htdocs\app_agenda_2/storage/agendamentos.json
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 6 agendamentos existentes
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
+[2026-02-19 19:13:15] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 2406
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"f5ea0d9fb38064584a2922f1e450b8fd95c64c6285919cfdc9fe71144ced5522","name":"Bruno Ferreira ","phone":"32 995458445","email":"brunoferreira@gmai.com","artist":"joao-oliveira","date":"2026-02-26","time":"14:00","style":"colorida","description":"teste 2"}
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_DADOS: Nome: Bruno Ferreira, Email: brunoferreira@gmai.com, Data: 2026-02-26, Hora: 14:00
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: joao-oliveira, 2026-02-26, 14:00
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_SEM_ERROS_FINAIS: Passou todas as validações, indo para salvamento
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_SALVANDO: Tentando salvar agendamento
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_SALVO_BD: Agendamento salvo com ID: 14
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_INICIO: Arquivo JSON: C:\xampp\htdocs\app_agenda_2/storage/agendamentos.json
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 7 agendamentos existentes
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
+[2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 2754

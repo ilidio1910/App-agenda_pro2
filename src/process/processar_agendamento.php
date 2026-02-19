@@ -85,16 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $erros[] = "Horário indisponível para esse profissional nesta data";
             }
             registrarLog('PROCESSAR_DISP_OK', 'Disponibilidade verificada');
+            registrarLog('PROCESSAR_SEM_ERROS_FINAIS', 'Passou todas as validações, indo para salvamento');
         } catch (Exception $e) {
             $erros[] = "Erro ao verificar disponibilidade: " . $e->getMessage();
         }
-    }
-
-    // Se houver erros, redirecionar com mensagem
-    if (!empty($erros)) {
-        $_SESSION['erro'] = implode(', ', $erros);
-        header('Location: ../../index.php');
-        exit;
     }
 
     // Preparar dados para salvar
