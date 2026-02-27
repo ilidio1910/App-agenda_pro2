@@ -251,7 +251,7 @@ unset($_SESSION['erro']);
             <div class="portfolio-filters">
                 <button class="filter-btn active" onclick="filterPortfolio('all')">Todos os Artistas</button>
                 <button class="filter-btn" onclick="filterPortfolio('ilidio-soares')">Ilidio Soares</button>
-                <button class="filter-btn" onclick="filterPortfolio('carlos-santos')">Carlos Santos</button>
+                <button class="filter-btn" onclick="filterPortfolio('carlos-santos')">Nathana Alves</button>
                 <button class="filter-btn" onclick="filterPortfolio('maria-costa')">Maria Costa</button>
                 <button class="filter-btn" onclick="filterPortfolio('joao-oliveira')">João Oliveira</button>
             </div>
@@ -262,19 +262,23 @@ unset($_SESSION['erro']);
                     <img src="img/tattoo-floral.jpg" alt="Blackwork - Mulher com Águia" loading="lazy">
                     <div class="portfolio-artist-tag">Ilidio Soares</div>
                 </div>
-                <div class="portfolio-item" data-artist="ilidio-soares" onclick="openImageModal('https://via.placeholder.com/300x300/000000/FFFFFF?text=Mandala+Blackwork')">
-                    <img src="img/tattoo-floral.jpg" alt="Blackwork - Mandala" loading="lazy">
+                <div class="portfolio-item" data-artist="ilidio-soares" onclick="openImageModal('img/desenho-baleia.jpg')">
+                    <img src="img/desenho-baleia.jpg" alt="Baleia-Blackwork" loading="lazy">
+                    <div class="portfolio-artist-tag">Ilidio Soares</div>
+                </div>
+                 <div class="portfolio-item" data-artist="ilidio-soares" onclick="openImageModal('img/desenho-baleia.jpg')">
+                    <img src="img/desenho-baleia.jpg" alt="Baleia-Blackwork" loading="lazy">
                     <div class="portfolio-artist-tag">Ilidio Soares</div>
                 </div>
 
-                <!-- Carlos Santos - Tradicional -->
-                <div class="portfolio-item" data-artist="carlos-santos" onclick="openImageModal('https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Águia+Tradicional')">
+                <!-- Nathana Soares - Tradicional -->
+                <div class="portfolio-item" data-artist="nathana-soares" onclick="openImageModal('https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Águia+Tradicional')">
                     <img src="https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Águia+Tradicional" alt="Tradicional - Águia" loading="lazy">
-                    <div class="portfolio-artist-tag">Carlos Santos</div>
+                    <div class="portfolio-artist-tag">Nathana Soares</div>
                 </div>
-                <div class="portfolio-item" data-artist="carlos-santos" onclick="openImageModal('https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=Caveira+Tradicional')">
+                <div class="portfolio-item" data-artist="nathana-soares" onclick="openImageModal('https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=Caveira+Tradicional')">
                     <img src="https://via.placeholder.com/300x300/9C27B0/FFFFFF?text=Caveira+Tradicional" alt="Tradicional - Caveira" loading="lazy">
-                    <div class="portfolio-artist-tag">Carlos Santos</div>
+                    <div class="portfolio-artist-tag">Nathana Soares</div>
                 </div>
 
                 <!-- Maria Costa - Minimalista -->
@@ -362,7 +366,7 @@ unset($_SESSION['erro']);
             <div class="footer-content">
                 <div class="footer-logo">
                     <div class="logo-icon">I</div>
-                    <span>© 2024 Ink Agenda Pro. Todos os direitos reservados.</span>
+                    <span>© 2025 Ink Agenda Pro. Todos os direitos reservados.</span>
                 </div>
                 <div class="footer-links">
                     <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>

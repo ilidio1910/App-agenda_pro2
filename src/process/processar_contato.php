@@ -10,7 +10,7 @@ session_start();
 require_once dirname(dirname(dirname(__FILE__))) . '/autoload.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/logs/logs_auditoria.php';
 
-// $emailManager = new EmailManager(); // Removido - sistema de email desabilitado
+// $emailManager = um EmailManager(); // Removido - sistema de email desabilitado
 $contato = new Contato();
 
 // Validar os dados do formulário de contato
@@ -80,10 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $contatos[] = $dados_contato;
         file_put_contents($arquivo_contatos, json_encode($contatos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-
-        // Sistema de email removido
-        // $emailManager->enviarConfirmacaoContato($dados_contato);
-        // $emailManager->notificarAdminContato($dados_contato);
 
         $_SESSION['sucesso'] = "Mensagem enviada com sucesso!";
         header('Location: ../../index.php');

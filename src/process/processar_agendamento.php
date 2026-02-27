@@ -10,7 +10,7 @@ session_start();
 require_once dirname(dirname(dirname(__FILE__))) . '/autoload.php';
 require_once dirname(dirname(dirname(__FILE__))) . '/logs/logs_auditoria.php';
 
-// $emailManager = new EmailManager(); // Removido - sistema de email desabilitado
+// $emailManager = um EmailManager(); // Removido - sistema de email desabilitado
 $agendamento = new Agendamento();
 
 // Validar os dados do formulário
@@ -132,10 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $resultado_json = file_put_contents($arquivo_agendamentos, json_encode($agendamentos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         registrarLog('PROCESSAR_JSON_SALVO', "JSON salvo, resultado: $resultado_json");
-
-        // Sistema de email removido
-        // $emailManager->enviarConfirmacaoAgendamento($dados_agendamento);
-        // $emailManager->notificarAdminAgendamento($dados_agendamento);
 
         $_SESSION['sucesso'] = "Agendamento realizado com sucesso!";
         header('Location: ../../index.php');

@@ -1,0 +1,17 @@
+[2026-02-20 00:55:54] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-20 00:59:00] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"4206251da9f311bdc36cd4f0f40c3e4c791e9806e4afaf0e34ec80e638e4ef74","name":"Ilidio Soares ","phone":"32 9988775","email":"ilidiosoares@gmail","artist":"ilidio-soares","date":"2026-02-27","time":"15:00","style":"blackwork","description":"teste 2"}
+[2026-02-20 00:59:00] [::1] [Sistema] PROCESSAR_DADOS: Nome: Ilidio Soares, Email: ilidiosoares@gmail, Data: 2026-02-27, Hora: 15:00
+[2026-02-20 00:59:00] [::1] [Sistema] PROCESSAR_ERROS_VALIDACAO: Erros: E-mail inválido
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"4206251da9f311bdc36cd4f0f40c3e4c791e9806e4afaf0e34ec80e638e4ef74","name":"lidio soares","phone":"32 99887765","email":"lidiofsores@gmail.com","artist":"carlos-santos","date":"2026-02-26","time":"09:00","style":"realismo","description":"teste 3"}
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_DADOS: Nome: lidio soares, Email: lidiofsores@gmail.com, Data: 2026-02-26, Hora: 09:00
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: carlos-santos, 2026-02-26, 09:00
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_SEM_ERROS_FINAIS: Passou todas as validações, indo para salvamento
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_SALVANDO: Tentando salvar agendamento
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_SALVO_BD: Agendamento salvo com ID: 15
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_JSON_INICIO: Arquivo JSON: C:\xampp\htdocs\app_agenda_2/storage/agendamentos.json
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 8 agendamentos existentes
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
+[2026-02-20 01:01:51] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 3098

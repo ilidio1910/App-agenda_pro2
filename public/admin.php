@@ -135,7 +135,7 @@ if (!estaAutenticado()) {
                     <button type="submit" class="btn-login">Entrar</button>
                     
                     <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary); font-size: 0.9rem;">
-                        Senha padrão: admin123 (mude em produção!)
+                        
                     </p>
                 </form>
             </div>
@@ -158,6 +158,29 @@ try {
     $agendamentos = [];
     $contatos = [];
     $erro_db = "Erro ao carregar dados: " . $e->getMessage();
+}
+
+// Processar exclusões
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
+    if ($_POST['acao'] === 'deletar_agendamento' && isset($_POST['id'])) {
+        try {
+            $agendamento->deletar($_POST['id']);
+            registrarLog('ADMIN_DELETE', 'Agendamento deletado: ID ' . $_POST['id']);
+            header('Location: admin.php?msg=agendamento_deletado');
+            exit;
+        } catch (Exception $e) {
+            $erro_db = "Erro ao deletar agendamento: " . $e->getMessage();
+        }
+    } elseif ($_POST['acao'] === 'deletar_contato' && isset($_POST['id'])) {
+        try {
+            $contato->deletar($_POST['id']);
+            registrarLog('ADMIN_DELETE', 'Contato deletado: ID ' . $_POST['id']);
+            header('Location: admin.php?msg=contato_deletado');
+            exit;
+        } catch (Exception $e) {
+            $erro_db = "Erro ao deletar contato: " . $e->getMessage();
+        }
+    }
 }
 
 // Função para fazer logout
@@ -311,6 +334,21 @@ if (isset($_GET['logout'])) {
             transform: translateY(-2px);
             opacity: 0.9;
         }
+        
+        .btn-delete {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+        }
     </style>
 </head>
 <body>
@@ -319,6 +357,22 @@ if (isset($_GET['logout'])) {
                 <h1>📊 Painel de Administração</h1>
                 <a href="?logout=1" class="btn-logout">Sair</a>
             </div>
+
+            <?php if (isset($_GET['msg'])): ?>
+            <div class="success-message" style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); color: var(--success); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; text-align: center;">
+                <?php if ($_GET['msg'] === 'agendamento_deletado'): ?>
+                    ✅ Agendamento deletado com sucesso!
+                <?php elseif ($_GET['msg'] === 'contato_deletado'): ?>
+                    ✅ Mensagem de contato deletada com sucesso!
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+
+            <?php if (isset($erro_db)): ?>
+            <div class="error-message" style="background: rgba(239, 68, 68, 0.1); border: 1px solid #EF4444; color: #EF4444; padding: 1rem; border-radius: 8px; margin-bottom: 2rem; text-align: center;">
+                <?php echo $erro_db; ?>
+            </div>
+            <?php endif; ?>
 
         <!-- Estatísticas -->
         <div class="stats-grid">
@@ -352,6 +406,7 @@ if (isset($_GET['logout'])) {
                         <th>Profissional</th>
                         <th>Data/Hora</th>
                         <th>Estilo</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -377,6 +432,13 @@ if (isset($_GET['logout'])) {
                             às <?php echo htmlspecialchars($agendamento['hora']); ?>
                         </td>
                         <td><?php echo htmlspecialchars($agendamento['estilo']); ?></td>
+                        <td>
+                            <form method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja deletar este agendamento?');">
+                                <input type="hidden" name="acao" value="deletar_agendamento">
+                                <input type="hidden" name="id" value="<?php echo $agendamento['id']; ?>">
+                                <button type="submit" class="btn-delete" title="Deletar agendamento">🗑️</button>
+                            </form>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -402,6 +464,7 @@ if (isset($_GET['logout'])) {
                         <th>E-mail</th>
                         <th>Assunto</th>
                         <th>Mensagem</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -422,6 +485,13 @@ if (isset($_GET['logout'])) {
                                 <summary style="cursor: pointer; color: var(--ink-purple);">Ver mensagem</summary>
                                 <p style="margin-top: 0.5rem;"><?php echo nl2br(htmlspecialchars($contato['mensagem'])); ?></p>
                             </details>
+                        </td>
+                        <td>
+                            <form method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja deletar esta mensagem de contato?');">
+                                <input type="hidden" name="acao" value="deletar_contato">
+                                <input type="hidden" name="id" value="<?php echo $contato['id']; ?>">
+                                <button type="submit" class="btn-delete" title="Deletar mensagem">🗑️</button>
+                            </form>
                         </td>
                     </tr>
                     <?php endforeach; ?>

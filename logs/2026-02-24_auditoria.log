@@ -1,0 +1,49 @@
+[2026-02-24 02:27:50] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"058f2067be62c146de655c0a3af3009b84272198924015ae5b925d7f292ae175","name":"Gabriel Alves","phone":"31 992347623","email":"gabrielalves@gmail.com","artist":"carlos-santos","date":"2026-02-26","time":"16:00","style":"minimalista","description":"Teste "}
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_DADOS: Nome: Gabriel Alves, Email: gabrielalves@gmail.com, Data: 2026-02-26, Hora: 16:00
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: carlos-santos, 2026-02-26, 16:00
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_SEM_ERROS_FINAIS: Passou todas as validações, indo para salvamento
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_SALVANDO: Tentando salvar agendamento
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_SALVO_BD: Agendamento salvo com ID: 16
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_JSON_INICIO: Arquivo JSON: C:\xampp\htdocs\app_agenda_2/storage/agendamentos.json
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 9 agendamentos existentes
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
+[2026-02-24 02:29:33] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 3446
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_POST: POST recebido para agendamento
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_DADOS: Nome: Lidio Soares Ferreira | Email: li***@gmail.com | Telefone: 31*******03 | Data/Hora: 2026-02-25 11:00
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-25, 11:00
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_SEM_ERROS_FINAIS: Passou todas as validações, indo para salvamento
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_SALVANDO: Tentando salvar agendamento
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_SALVO_BD: Agendamento salvo com ID: 17
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_JSON_INICIO: Arquivo JSON: C:\xampp\htdocs\app_agenda_2/storage/agendamentos.json
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 10 agendamentos existentes
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
+[2026-02-24 03:57:24] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 3811
+[2026-02-24 04:04:27] [::1] [Sistema] CONTATO_DADOS: Nome: Ilidio Soares | Email: il***@gmail.com | Telefone: *** | Assunto: Teste
+[2026-02-24 04:07:14] [::1] [Sistema] ADMIN_LOGOUT: Logout realizado
+[2026-02-24 04:07:25] [::1] [Sistema] ADMIN_LOGIN_FALHA: Tentativa de login com senha incorreta
+[2026-02-24 04:07:37] [::1] [Sistema] ADMIN_LOGIN_FALHA: Tentativa de login com senha incorreta
+[2026-02-24 04:07:37] [::1] [Sistema] ADMIN_LOGIN_FALHA: Tentativa de login com senha incorreta
+[2026-02-24 04:07:45] [::1] [Sistema] ADMIN_LOGIN_FALHA: Tentativa de login com senha incorreta
+[2026-02-24 04:07:45] [::1] [Sistema] ADMIN_LOGIN_FALHA: Tentativa de login com senha incorreta
+[2026-02-24 05:10:28] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_POST: Dados recebidos: {"csrf_token":"e185203977ac6ca5b4455ffa5e8984371a1b575046839bedc8edacfd8dcbd5a7","name":"ilidio soares","phone":"31 992343234","email":"ilidiosoares@gmail.com","artist":"ilidio-soares","date":"2026-02-28","time":"14:00","style":"blackwork","description":"Teste"}
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_DADOS: Nome: ilidio soares, Email: ilidiosoares@gmail.com, Data: 2026-02-28, Hora: 14:00
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_VALIDACOES_OK: Validações básicas passaram
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_ANTES_DISP: Antes da verificação de disponibilidade, erros: vazio
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_VERIFICANDO_DISP: Verificando: ilidio-soares, 2026-02-28, 14:00
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_DISP_OK: Disponibilidade verificada
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_SEM_ERROS_FINAIS: Passou todas as validações, indo para salvamento
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_SALVANDO: Tentando salvar agendamento
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_SALVO_BD: Agendamento salvo com ID: 18
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_JSON_INICIO: Arquivo JSON: C:\xampp\htdocs\app_agenda_2/storage/agendamentos.json
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 11 agendamentos existentes
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
+[2026-02-24 05:12:37] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 4157
+[2026-02-24 22:58:21] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido

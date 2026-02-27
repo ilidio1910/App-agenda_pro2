@@ -67,3 +67,5 @@
 [2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_LIDO: JSON lido, 7 agendamentos existentes
 [2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_ADICIONADO: Novo agendamento adicionado ao array
 [2026-02-19 19:39:58] [::1] [Sistema] PROCESSAR_JSON_SALVO: JSON salvo, resultado: 2754
+[2026-02-19 20:32:18] [::1] [Sistema] ADMIN_LOGOUT: Logout realizado
+[2026-02-19 20:32:21] [::1] [Sistema] ADMIN_LOGIN: Login bem-sucedido

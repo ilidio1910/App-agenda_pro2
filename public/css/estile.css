@@ -5,7 +5,7 @@
 }
 
 :root {
-    --ink-purple: #8B5CF6;
+    --ink-purple: #733af8;
     --ink-blue: #3B82F6;
     --dark-bg: #0F0F23;
     --card-bg: #1A1A2E;
@@ -93,8 +93,33 @@ nav a:hover, nav a.active {
 
 /* Hero Section */
 .hero {
-    padding: 4rem 0;
+    position: relative;
+    padding: 6rem 0;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    background-image: url('../img/estudio1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 15, 35, 0.85), rgba(0, 0, 0, 0.4));
+    z-index: 0;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero h1 {
@@ -248,8 +273,8 @@ nav a:hover, nav a.active {
 }
 
 .artist-image img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     display: flex;
     border: 0;
@@ -500,10 +525,10 @@ nav a:hover, nav a.active {
 }
 
 .feature-icon {
-    width: 48px;
-    height: 48px;
+    width: 35px;
+    height: 35px;
     background: var(--ink-purple);
-    border-radius: 8px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -571,6 +596,12 @@ footer {
     nav {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .hero {
+        padding: 4rem 1.5rem;
+        min-height: 60vh;
+        background-attachment: scroll;
     }
 
     .hero h1 {
